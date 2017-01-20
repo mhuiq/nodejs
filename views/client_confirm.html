@@ -4,10 +4,15 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+    th {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 </style>
 <div style='font-family:Microsoft YaHei;font-size:10px;color:#333333;'>
     <span style='color:#E53333;font-size:40px'>客户确认</span><br/><br/>
-    <table width='100%' border='0' bordercolor='#009900' style='font-size:30px;margin-left:0px;color:#333333;table-layout:fixed'>
+    <table width='100%' border=0' bordercolor='#009900' style='font-size:30px;margin-left:0px;color:#333333;table-layout:fixed'>
         <tr height="50px">
             <td>付款账号：{0}</td>
             <td>付款人姓名：{1}</td>
@@ -37,15 +42,46 @@
             <td >税票号码：{16}</td>
             <td >税种条数：{17}</td>
         </tr>
-        <tr>
-            <td id="testid">收款人行号：{15}</td>
-        </tr>
     </table>
+
+    <div style="overflow-x: scroll;margin-top: 10px;">
+        <table width='100%;' border="1" bordercolor='#009900' style='font-size:30px;margin-left:0px;color:#333333;'>
+            <thead>
+                <tr>
+                    <th>项目序号</th>
+                    <th>预算科目代码</th>
+                    <th>限缴日期</th>
+                    <th>税种名称</th>
+                    <th>预算级次代码</th>
+                    <th>预算级次名称</th>
+                    <th>税款所属日期起</th>
+                    <th>税款所属日期止</th>
+                    <th>税种金额</th>
+                    <th>辅助标志</th>
+                    <th>合同号</th>
+                    <th>运输工具号</th>
+                    <th>提/装货单号</th>
+                    <th>国际代码</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                    <th>6</th>
+                    <th>7</th>
+                    <th>8</th>
+                    <th>9</th>
+                    <th>0</th>
+                    <th>1</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-
-<script type="text/javascript">
-    (function () {
-        document.getElementById('testid').innerText="成功执行脚本";
-    })();
-
-</script>

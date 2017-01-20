@@ -1,68 +1,32 @@
 /**
+ * 客户端连接器
  * Created by 80374361 on 2017/1/18.
  */
 var WebSocket = require('ws');
-var WebSocketServer = WebSocket.Server, wss;
 var uuid = require('node-uuid');
+var certTokenManager = require('./lib/cert_token_manager');
+var WebSocketServer = WebSocket.Server;
 var clients = [];
-function wsSend(type, client_uuid, nickname, message) {
-    for (var i = 0; i < clients.length; i++) {
-        var clientSocket = clients[i].ws;
-        if (clientSocket.readyState === WebSocket.OPEN) {
-            clientSocket.send(JSON.stringify({
-                "type": type,
-                "id": client_uuid,
-                "nickname": nickname,
-                "message": message
-            }));
-        }
-    }
-}
-var clientIndex = 1;
+
 function start () {
-    wss = new WebSocketServer({port: 8181})
+    var wss = new WebSocketServer({port: 8181})
     wss.on('connection', function (ws) {
-        var client_uuid = uuid.v4();
-        var nickname = "AnonymousUser" + clientIndex;
-        clientIndex += 1;
-        clients.push({"id": client_uuid, "ws": ws, "nickname": nickname});
-        console.log('client [%s] connected', client_uuid);
-        var connect_message = nickname + " has connected";
-        wsSend("notification", client_uuid, nickname, connect_message);
-        console.log('client [%s] connected', client_uuid);
+        var appId = uuid.v4();
+        certTokenManager.addNewClient(appId, ws);
+        clients.push({"id": appId, "ws": ws});
+        console.log('客户端 [%s] 连接成功！', appId);
+        ws.send("建立连接成功！")
+
         ws.on('message', function (message) {
-            if (message.indexOf('/nick') === 0) {
-                var nickname_array = message.split(' ');
-                if (nickname_array.length >= 2) {
-                    var old_nickname = nickname;
-                    nickname = nickname_array[1];
-                    var nickname_message = "Client " + old_nickname + " changed to " + nickname;
-                    wsSend("nick_update", client_uuid, nickname, nickname_message);
-                }
-            } else {
-                wsSend("message", client_uuid, nickname, message);
-            }
+            // TODO 处理客户端发过来的交易
         });
-        var closeSocket = function (customMessage) {
-            for (var i = 0; i < clients.length; i++) {
-                if (clients[i].id == client_uuid) {
-                    var disconnect_message;
-                    if (customMessage) {
-                        disconnect_message = customMessage;
-                    } else {
-                        disconnect_message = nickname + " has disconnected";
-                    }
-                    wsSend("notification", client_uuid, nickname, disconnect_message);
-                    clients.splice(i, 1);
-                }
-            }
-        };
+
         ws.on('close', function () {
-            closeSocket();
+            certTokenManager.removeClient(appId);
         });
         process.on('SIGINT', function () {
-            console.log("Closing things");
-            closeSocket('Server has disconnected');
+            console.log("服务端关闭！");
+            // TODO 向客户端发送服务端关闭信息
             process.exit();
         });
     });
