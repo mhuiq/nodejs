@@ -13,7 +13,7 @@ router.post('/', function (req, res) {
         data += chunk;
     })
     req.on('end', function () {
-        responseData = {};
+        var responseData = {};
         console.log('收到认证中心想认证结果：', data);
         var requestData = JSON.parse(data);
         var certToken = requestData['cert_token'];
