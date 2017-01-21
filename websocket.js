@@ -1,32 +1,59 @@
 /**
- * ¿Í»§¶ËÁ¬½ÓÆ÷
+ * å®¢æˆ·ç«¯è¿æ¥å™¨
  * Created by 80374361 on 2017/1/18.
  */
 var WebSocket = require('ws');
-var uuid = require('node-uuid');
 var certTokenManager = require('./lib/cert_token_manager');
+var opcodeConstants = require('./lib/opcode_constants');
 var WebSocketServer = WebSocket.Server;
-var clients = [];
+var validClients = [];
 
 function start () {
     var wss = new WebSocketServer({port: 8181})
     wss.on('connection', function (ws) {
-        var appId = uuid.v4();
-        certTokenManager.addNewClient(appId, ws);
-        clients.push({"id": appId, "ws": ws});
-        console.log('¿Í»§¶Ë [%s] Á¬½Ó³É¹¦£¡', appId);
-        ws.send("½¨Á¢Á¬½Ó³É¹¦£¡")
-
+        var appId = "";
+        console.log('å®¢æˆ·ç«¯è¿æ¥æˆåŠŸï¼');
+        ws.send({"opcode": "connection","rtncode": "sucess", "errmsg":"å»ºç«‹è¿æ¥æˆåŠŸ"});
         ws.on('message', function (message) {
-            // TODO ´¦Àí¿Í»§¶Ë·¢¹ıÀ´µÄ½»Ò×
+            // TODO å¤„ç†å®¢æˆ·ç«¯å‘è¿‡æ¥çš„äº¤æ˜“
+            var reqParams = JSON.parse(message);
+            var opcode = reqParams['opcode'];
+            switch (opcode) {
+                case opcodeConstants.gentoken:
+                    appId = reqParams['devid'];
+                    console.log("æ”¶åˆ°å®¢æˆ·ç«¯ç”³è¯·cert_tokenè¯·æ±‚ï¼Œå®¢æˆ·ç«¯è®¾å¤‡å·ä¸ºï¼š", appId);
+                    // TODO è¿æ¥æ•°æ®ï¼Œåˆ¤æ–­è¯¥appIdæ˜¯å¦æœ‰æ•ˆ
+                    certTokenManager.addNewClient(appId, ws);
+                    validClients.push({"appId": appId, "ws": ws});
+                    break;
+
+                default :
+                    break;
+            }
         });
 
         ws.on('close', function () {
+            // å®¢æˆ·ç«¯æ–­å¼€è¿æ¥æ—¶æ¸…ç†å®¢æˆ·ç«¯æ•°æ®
+            if (appId === "") {
+                return ;
+            }
             certTokenManager.removeClient(appId);
+            removeValidClient();
+            console.log('å®¢æˆ·ç«¯%så·²ç»æ–­å¼€è¿æ¥ã€‚', appId);
         });
+
+        removeValidClient = function () {
+            for (var i=0; i<validClients.length; ++i) {
+                if (validClients[i].appId === appId) {
+                    validClients.splice(i, 1);
+                    return;
+                }
+            }
+        };
+
         process.on('SIGINT', function () {
-            console.log("·şÎñ¶Ë¹Ø±Õ£¡");
-            // TODO Ïò¿Í»§¶Ë·¢ËÍ·şÎñ¶Ë¹Ø±ÕĞÅÏ¢
+            console.log("æœåŠ¡ç«¯å…³é—­ï¼");
+            // TODO å‘å®¢æˆ·ç«¯å‘é€æœåŠ¡ç«¯å…³é—­ä¿¡æ¯
             process.exit();
         });
     });
@@ -34,6 +61,5 @@ function start () {
 
 exports.startWebsocket = start;
 exports.getClients = function() {
-    return clients;
-}
-exports.sendMsg = wsSend;
+    return validClients;
+};
