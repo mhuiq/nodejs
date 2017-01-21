@@ -1,0 +1,16 @@
+设备端与服务端采用WEBSOCKET连接，通讯报文采用json格式
+1、GENTOKEN
+MSG_GENTOKEN = "{\"opcode\":\"GENTOKEN\",\"devid\":%s}"
+设备端：定时发起（token失效5分钟）
+服务端：检查accesstoken是否失效，异步去认证端申请新token。
+
+2、SNDTOKEN
+MSG_SNDTOKEN = "{\"opcode\":\"SNDTOKEN\",\"token\":%s,\"mode\":%s}";
+服务端：完成认证端token申请后，传递给设备端。维护devid和token的关系，devid和token是一对多关系。mode通过查本地表获取，通过设备和房屋的关系，以及房屋配置的认证策略。通过devid找wssession，组包通讯。
+设备端：显示token二维码
+
+3、CERTRES
+MSG_CERTRES = "{\"opcode\":\"CERTRES\",\"id_num\":%s,\"full_name\":%s}";
+服务端：收到认证端的认证结果，传递给设备端。通过token取devid，通过devid取授权信息，通过id_num和full_name检查授权是否存在。通过devid找wssession，组包通讯。
+设备端：发送开锁指令
+
