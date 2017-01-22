@@ -48,12 +48,3 @@ router.post('/', function (req, res) {
 });
 
 module.exports = router;
-
-(function () {
-    var num = 0XEFFF0304;
-    var buff = new Buffer(4);
-    buff.writeInt32BE(num);
-    console.log(buff[1]);
-    buff.writeInt32LE(num);
-    console.log(buff[0]);
-})();
