@@ -1,0 +1,41 @@
+生成RSA私钥
+	openssl genrsa -out rsa_private_key.pem 1024
+
+生成RSA公钥
+	openssl rsa -in rsa_private_key.pem -pubout -out rsa_public_key.pem
+
+将RSA私钥转换成PKCS8格式
+	openssl pkcs8 -topk8 -inform PEM -in rsa_private_key.pem -outform PEM -nocrypt
+
+生成加密的 RSA 私钥
+	openssl genrsa -out rsa_desprv_key.pem 1024 -des3 -passout pass:111111
+	
+解密 RSA 私钥
+	openssl rsa -in rsa_desprv_key.pem -out rsa_nodesprv_key.pem -passin pass:111111
+	
+查看pem格式证书（x509标准）
+	openssl x509 -in keytool_crt.pem -inform pem -noout -text
+	
+查看der格式证书
+	openssl x509 -in keytool_crt.der -inform der -noout -tex
+	
+x509标准的der证书转pem
+	openssl x509 -inform der -in certificate.cer -out certificate.pem
+	
+x509标准的pem证书转der
+	openssl x509 -inform pem -in certificate.cer -outform der -out certificate.der
+
+x509标准的私钥转换
+	openssl rsa -inform DER -outform PEM -in privatekey.der -out privatekey.pem
+	
+生成证书
+	openssl req -new -x509 -key rsa_private_key.pem -out cacert.pem -days 1095
+	或
+	openssl req -new -key rsa_private_key.pem -out key.csr
+	openssl x509 -req -days 9999 -in key.csr -signkey rsa_private_key -out cert.pem(证书签名请求与证书私钥都需要参与签名)
+
+生成csr签名请求证书
+	openssl req -new -key rsa_private_key.pem -out key.csr
+
+导出P12文件（-in 必须是证书，不是是私钥）
+	openssl pkcs12 -export -out p.pfx -inkey private.pem -in cert.pem
