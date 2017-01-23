@@ -3,6 +3,7 @@
  * Created by 80374361 on 2017/1/18.
  */
 var WebSocket = require('ws');
+var devInfoDao = require('../lib/dao/dev_info_dao');
 var certTokenManager = require('./lib/cert_token_manager');
 var opcodeConstants = require('./lib/opcode_constants');
 var WebSocketServer = WebSocket.Server;
@@ -22,9 +23,13 @@ function start () {
                 case opcodeConstants.gentoken:
                     appId = reqParams['devid'];
                     console.log("收到客户端申请cert_token请求，客户端设备号为：", appId);
-                    // TODO 连接数据，判断该appId是否有效
-                    certTokenManager.addNewClient(appId, ws);
-                    validClients.push({"appId": appId, "ws": ws});
+                    devInfoDao.queryByAppId(appId, function (result) {
+                        // 判断该appId是否有效
+                        if (result.length == 0) {
+                            certTokenManager.addNewClient(appId, ws);
+                            validClients.push({"appId": appId, "ws": ws});
+                        }
+                    });
                     break;
 
                 default :
