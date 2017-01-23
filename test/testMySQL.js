@@ -23,12 +23,12 @@ var BaseTable = db.Table;*/
 });*/
 
 var mysql = require('mysql');
-var conn = mysql.createConnection({
+var config = {
     host: 'localhost',
     port: 3306,
     user: 'root',
     password: 'Midsrv@2016',
-    database: 'board',
+    database: 'authdb',
     connectionLimit: 50,
     useTransaction: {
         connectionLimit: 20
@@ -36,8 +36,45 @@ var conn = mysql.createConnection({
     useCursor: {
         connectionLimit:1
     }
+};
+
+var pool = mysql.createPool(config);
+
+pool.getConnection(function (err, conn) {
+    conn.query('select * from tab_user_info limit 1',function (err, rows) {
+        if (err) {
+            throw err;
+        }
+        console.log("一次查询：",rows);
+        conn.release();
+    });
 });
-conn.connect();
+
+pool.getConnection(function (err, conn) {
+    conn.query('select * from tab_user_info limit 1',function (err, rows) {
+        if (err) {
+            throw err;
+        }
+        console.log("二次查询：",rows);
+        conn.release();
+    });
+});
+
+/*var conn = mysql.createConnection({
+    host: 'localhost',
+    port: 3306,
+    user: 'root',
+    password: 'Midsrv@2016',
+    database: 'authdb',
+    connectionLimit: 50,
+    useTransaction: {
+        connectionLimit: 20
+    },
+    useCursor: {
+        connectionLimit:1
+    }
+});*/
+/*conn.connect();*/
 /*var baseicTest = function (cb) {
     box.connect(function (conn, cb) {
        cps.seq([
@@ -51,10 +88,19 @@ conn.connect();
        ], cb);
     }, cb);
 }*/
-conn.query('select * from MID_Meeting_T limit 1', function (err, rows, fields) {
+/*conn.query('select * from tab_user_info limit 1', function (err, rows, fields) {
     if (err) {
         throw err;
     }
-    console.log(rows);
+    console.log("一次查询：",rows);
+});*/
+//conn.end();
+
+/*
+conn.query('select * from tab_user_info limit 1', function (err, rows, fields) {
+    if (err) {
+        throw err;
+    }
+    console.log("二次查询", rows);
 });
-conn.end();
+conn.end();*/
