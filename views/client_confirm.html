@@ -1,46 +1,40 @@
-<style type="text/css">
-    td {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    th {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-</style>
 <div style='font-family:Microsoft YaHei;font-size:10px;color:#333333;'>
-    <span style='color:#E53333;font-size:40px'>�ͻ�ȷ��</span><br/><br/>
+    <span style='color:#E53333;font-size:40px'>客户确认</span><br/><br/>
     <table width='100%' border=0' bordercolor='#009900' style='font-size:30px;margin-left:0px;color:#333333;table-layout:fixed'>
         <tr height="50px">
-            <td>�����˺ţ�{0}</td>
-            <td>������������{1}</td>
+            <td style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">付款账号：{0}</td>
+            <td style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">付款人姓名：{1}</td>
         </tr>
         <tr>
-            <td>���ջ��ش��룺{3}</td>
-            <td>�տ����˺ţ�{4}</td>
-            <td>��Ʊ���ڣ�{5}</td>
+            <td style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">征收机关代码：{2}</td>
+            <td style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">收款人账号：{3}</td>
         </tr>
         <tr>
-            <td>ί�����ڣ�{6}</td>
-            <td>�տ������ƣ�{7}</td>
-            <td>��˰�˱��룺{8}</td>
+            <td style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">开票日期：{4}</td>
+            <td style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">委托日期：{5}</td>
         </tr>
         <tr>
-            <td>������ˮ�ţ�{9}</td>
-            <td>���֣�{10}</td>
-            <td>��˰�����ƣ�{11}</td>
+            <td style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">收款人名称：{6}</td>
+            <td style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">纳税人编码：{7}</td>
         </tr>
         <tr>
-            <td>������룺{12}</td>
-            <td>��{13}</td>
-            <td>ϵͳ���{14}</td>
+            <td style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">交易流水号：{8}</td>
+            <td style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">币种：{9}</td>
         </tr>
         <tr>
-            <td>�տ����кţ�{15}</td>
-            <td >˰Ʊ���룺{16}</td>
-            <td >˰��������{17}</td>
+            <td colspan="2" style="white-space:nowrap;overflow: hidden;text-overflow: ellipsis;">纳税人名称：{10}</td>
+        </tr>
+        <tr>
+            <td style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">国库代码：{12}</td>
+            <td style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">金额：{12}</td>
+        </tr>
+        <tr>
+            <td style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">系统类别：{13}</td>
+            <td style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">收款人行号：{14}</td>
+        </tr>
+        <tr>
+            <td style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">税票号码：{15}</td>
+            <td style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">税种条数：{16}</td>
         </tr>
     </table>
 
@@ -48,38 +42,38 @@
         <table width='100%;' border="1" bordercolor='#009900' style='font-size:30px;margin-left:0px;color:#333333;'>
             <thead>
                 <tr>
-                    <th>��Ŀ���</th>
-                    <th>Ԥ���Ŀ����</th>
-                    <th>�޽�����</th>
-                    <th>˰������</th>
-                    <th>Ԥ�㼶�δ���</th>
-                    <th>Ԥ�㼶������</th>
-                    <th>˰������������</th>
-                    <th>˰����������ֹ</th>
-                    <th>˰�ֽ��</th>
-                    <th>������־</th>
-                    <th>��ͬ��</th>
-                    <th>���乤�ߺ�</th>
-                    <th>��/װ������</th>
-                    <th>���ʴ���</th>
+                    <th style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">项目序号</th>
+                    <th style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">预算科目代码</th>
+                    <th style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">限缴日期</th>
+                    <th style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">税种名称</th>
+                    <th style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">预算级次代码</th>
+                    <th style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">预算级次名称</th>
+                    <th style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">税款所属日期起</th>
+                    <th style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">税款所属日期止</th>
+                    <th style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">税种金额</th>
+                    <th style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">辅助标志</th>
+                    <th style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">合同号</th>
+                    <th style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">运输工具号</th>
+                    <th style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">提/装货单号</th>
+                    <th style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">国际代码</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <th>1</th>
-                    <th>2</th>
-                    <th>3</th>
-                    <th>4</th>
-                    <th>5</th>
-                    <th>6</th>
-                    <th>7</th>
-                    <th>8</th>
-                    <th>9</th>
-                    <th>0</th>
-                    <th>1</th>
-                    <th>3</th>
-                    <th>4</th>
-                    <th>5</th>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
                 </tr>
             </tbody>
         </table>
