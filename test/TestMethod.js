@@ -15,15 +15,42 @@ var globalMethod = function () {
     console.log(this.globalVar);
 };
 globalMethod();
+
+var scheduler = require('node-schedule');
+
+// var montlyJob = scheduler.scheduleJob('1 * * * * *', function () {
+//    console.log('scheduler task emit !');
+// });
+
 (function () {
     var hasVal = "你好";
     var noVal = {};
     var testVal = noVal['val'] || hasVal;
     console.log(encodeURI(testVal));
 
-    var num = 0x7FFFFFFF;
+    var num = 0x7F7F7F7F;
     var buf = Buffer.alloc(4);
     buf.writeInt32BE(num);
     var hex = buf.toString('hex');
     console.log(hex);
+
+    var tmpObj = {};
+    tmpObj.nowTime = Date.now();
+    setInterval(printFuncExec(tmpObj), 5000);
+
+    setInterval(changeFuncExec(tmpObj), 1000);
+
+
 })();
+
+function printFuncExec (tmpObj) {
+    return function () {
+        console.log(tmpObj.nowTime);
+    }
+}
+
+function changeFuncExec (tmpObj) {
+    return function () {
+        tmpObj.nowTime = Date.now();
+    }
+}
