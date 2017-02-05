@@ -15,3 +15,15 @@ var globalMethod = function () {
     console.log(this.globalVar);
 };
 globalMethod();
+(function () {
+    var hasVal = "你好";
+    var noVal = {};
+    var testVal = noVal['val'] || hasVal;
+    console.log(encodeURI(testVal));
+
+    var num = 0x7FFFFFFF;
+    var buf = Buffer.alloc(4);
+    buf.writeInt32BE(num);
+    var hex = buf.toString('hex');
+    console.log(hex);
+})();

@@ -25,7 +25,7 @@ function start () {
                     console.log("收到客户端申请cert_token请求，客户端设备号为：", appId);
                     devInfoDao.queryByAppId(appId, function (result) {
                         // 判断该appId是否有效
-                        if (result.length == 0) {
+                        if (result.length != 0) {
                             certTokenManager.addNewClient(appId, ws);
                             validClients.push({"appId": appId, "ws": ws});
                         }
