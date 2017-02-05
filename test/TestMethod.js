@@ -8,3 +8,10 @@
     console.log(jsonSubject.cert_token);
     console.log(jsonSubject['full_name']);
 })();
+
+var globalVar = "globalVar";
+
+var globalMethod = function () {
+    console.log(this.globalVar);
+};
+globalMethod();
