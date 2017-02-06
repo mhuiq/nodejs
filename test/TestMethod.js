@@ -18,10 +18,30 @@ globalMethod();
 
 var scheduler = require('node-schedule');
 
-// var montlyJob = scheduler.scheduleJob('1 * * * * *', function () {
-//    console.log('scheduler task emit !');
-// });
+var montlyJob = scheduler.scheduleJob('1 * * * * *', function () {
+   console.log('scheduler task emit ! now the time is ', Date.now());
+});
 
+(function () {
+    var array = [];
+    array.push("hello");
+    array.push(10);
+    array.push("this is another");
+    console.log(array.length);
+    array.forEach(function (val) {
+        console.log(val);
+    });
+
+    var tmpObj = {};
+    tmpObj['hello1'] = "hello1";
+    tmpObj['hello2'] = "hello2";
+    console.log(JSON.stringify(tmpObj));
+    var hello1 = tmpObj['hello1'];
+    delete tmpObj['hello1'];
+    console.log(tmpObj);
+})();
+
+/*
 (function () {
     var hasVal = "你好";
     var noVal = {};
@@ -53,4 +73,4 @@ function changeFuncExec (tmpObj) {
     return function () {
         tmpObj.nowTime = Date.now();
     }
-}
+}*/
