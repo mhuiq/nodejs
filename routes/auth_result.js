@@ -35,9 +35,11 @@ router.post('/', function (req, res) {
         var sql = "select * from tab_auth_info where HOUSEID = (select t1.houseid from tab_dev_info t1 where t1.APPID = 'D92E3FFD-045A-45B4-BA92-CEECDC9FE745' and t1.RECORDSTATUS = 'Y') and IDCARD = ?";
         db.query(sql, [appId, idNum], function (authInfoRs) {
             if (authInfoRs.length < 1) {
-
+                // TODO 返回给认证服务器错误信息
+                return;
             }
-        })
+            // TODO 1.根据认证服务器返回的认证模式进行认证；2.认证成功后，将cert_token对应的certToken对象设置为已验证状态，并且为该客户端重新申请密钥
+        });
         switch (certMode) {
             case 0X40:
                 // TODO 认证姓名+身份证号码进行身份认证
