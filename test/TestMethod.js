@@ -39,6 +39,14 @@ var montlyJob = scheduler.scheduleJob('1 * * * * *', function () {
     var hello1 = tmpObj['hello1'];
     delete tmpObj['hello1'];
     console.log(tmpObj);
+
+    var FF = 0xFF;
+    var result = 0x04030201;
+    console.log(0xFF & result);
+    console.log(0xFF & (result >> 8));
+    console.log(0xFF & (result >> 16));
+    console.log(0xFF & (result >> 24));
+
 })();
 
 /*
