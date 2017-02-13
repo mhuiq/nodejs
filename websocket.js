@@ -3,7 +3,7 @@
  * Created by 80374361 on 2017/1/18.
  */
 var WebSocket = require('ws');
-var devInfoDao = require('../lib/dao/dev_info_dao');
+var devInfoDao = require('./lib/dao/dev_info_dao');
 var certTokenManager = require('./lib/cert_token_manager');
 var opcodeConstants = require('./lib/opcode_constants');
 var WebSocketServer = WebSocket.Server;
@@ -14,7 +14,7 @@ function start () {
     wss.on('connection', function (ws) {
         var appId = "";
         console.log('客户端连接成功！');
-        ws.send({"opcode": "connection","rtncode": "sucess", "errmsg":"建立连接成功"});
+        ws.send(JSON.stringify({"opcode": "connection","rtncode": "sucess", "errmsg":"建立连接成功"}));
         ws.on('message', function (message) {
             // TODO 处理客户端发过来的交易
             var reqParams = JSON.parse(message);

@@ -38,6 +38,8 @@ server.on('listening', onListening);
 var websocket = require('../websocket');
 websocket.startWebsocket();
 
+var accessTokenManager = require('../lib/access_token_manager');
+accessTokenManager.initAccessToken();
 
 /**
  * Normalize a port into a number, string, or false.

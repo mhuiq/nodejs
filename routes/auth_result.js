@@ -52,25 +52,25 @@ router.post('/', function (req, res) {
             switch (certMode) {
                 case 0X40:
                     // TODO 认证姓名+身份证号码进行身份认证
-                    if (String.fromCharCode(buf[0]) === 0 && String.fromCharCode(buf[1] === 'X')) {
+                    if (String.fromCharCode(buf[0]) === 0 && String.fromCharCode(buf[1]) === 'X') {
                         certTokenManager.authSuccess(certToken);
                     }
                     break;
                 case 0X42:
                     // TODO 姓名+身份证号码+人像进行身份认证
-                    if (String.fromCharCode(buf[0]) === '0' && String.fromCharCode(buf[1] === '0')) {
+                    if (String.fromCharCode(buf[0]) === '0' && String.fromCharCode(buf[1]) === '0') {
                         certTokenManager.authSuccess(certToken);
                     }
                     break;
                 case 0X0F:
                     // TODO 使用DN＋网上副本＋人像进行身份认证
-                    if (String.fromCharCode(buf[0]) === '0' && String.fromCharCode(buf[1] === '0' && String.fromCharCode(buf[3] === '0')) {
+                    if (String.fromCharCode(buf[0]) === '0' && String.fromCharCode(buf[1]) === '0' && String.fromCharCode(buf[3]) === '0') {
                         certTokenManager.authSuccess(certToken);
                     }
                     break;
                 case 0X4F:
                     // TODO 使用姓名+身份证号码＋网上副本＋人像进行身份认证
-                    if (String.fromCharCode(buf[0]) === '0' && String.fromCharCode(buf[1] === '0' && String.fromCharCode(buf[3] === '0')) {
+                    if (String.fromCharCode(buf[0]) === '0' && String.fromCharCode(buf[1]) === '0' && String.fromCharCode(buf[3]) === '0') {
                         certTokenManager.authSuccess(certToken);
                     }
                     break;
