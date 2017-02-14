@@ -9,8 +9,8 @@ var opcodeConstants = require('./lib/opcode_constants');
 var WebSocketServer = WebSocket.Server;
 var validClients = [];
 
-function start () {
-    var wss = new WebSocketServer({port: 8181})
+function start (server) {
+    var wss = new WebSocketServer({server: server})
     wss.on('connection', function (ws) {
         var appId = "";
         console.log('客户端连接成功！');
