@@ -9,8 +9,10 @@ var opcodeConstants = require('./lib/opcode_constants');
 var WebSocketServer = WebSocket.Server;
 var validClients = [];
 
-function start (server) {
-    var wss = new WebSocketServer({server: server})
+//function start (server) {
+	function start () {
+	    //var wss = new WebSocketServer({server: server})
+			var wss = new WebSocketServer({port: 9777})
     wss.on('connection', function (ws) {
         var appId = "";
         console.log('客户端连接成功！');
@@ -26,6 +28,7 @@ function start (server) {
                     devInfoDao.queryByAppId(appId, function (result) {
                         // 判断该appId是否有效
                         if (result.length != 0) {
+                        	  console.log('gentoken go');
                             certTokenManager.addNewClient(appId, ws);
                             validClients.push({"appId": appId, "ws": ws});
                         }

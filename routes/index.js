@@ -3,6 +3,7 @@ var router = express.Router();
 var ws = require('../websocket');
 /* GET home page. */
 router.get('/', function (req, res, next) {
+    console.log("index called");
     var clients = ws.getClients();
     console.log(clients);
     for (var i=0; i<clients.length; ++i) {

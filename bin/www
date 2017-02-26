@@ -8,24 +8,30 @@ var app = require('../app');
 var debug = require('debug')('authserver:server');
 var https = require('https')
     url = require('url');
+var http = require('http');
 
+/*
 var options = {
-  key: fs.readFileSync('cert/key.pem'),
-  cert: fs.readFileSync('cert/cert.pem')
+  key: fs.readFileSync('cert/2_daoheqiankun.cn.key'),
+  cert: fs.readFileSync('cert/1_daoheqiankun.cn_bundle.crt')
 };
+*/
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '8088');
+//var port = normalizePort(process.env.PORT || '8088');
+
+var port = normalizePort(process.env.PORT || '9666');
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-var server = https.createServer(options, app);
+//var server = https.createServer(options, app);
+var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -36,10 +42,11 @@ server.on('error', onError);
 server.on('listening', onListening);
 
 var websocket = require('../websocket');
-websocket.startWebsocket(server);
+//websocket.startWebsocket(server);
+websocket.startWebsocket();
 
 var accessTokenManager = require('../lib/access_token_manager');
-// TODO accessTokenManager.initAccessToken();
+accessTokenManager.initAccessToken();
 
 /**
  * Normalize a port into a number, string, or false.

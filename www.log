@@ -1,0 +1,162 @@
+0
+1
+X
+1
+{ access_token: '3f5a1717-490f-4ac3-ae6b-820c5cd12bfb',
+  error_msg: '成功',
+  old_access_token: 'c42a791c-faf5-4f84-b05d-62bc707bca82',
+  expire_seconds: 7200,
+  ret_code: 0 }
+3f5a1717-490f-4ac3-ae6b-820c5cd12bfb
+客户端连接成功！
+客户端连接成功！
+收到客户端申请cert_token请求，客户端设备号为： 64-80-99-E6-15-27
+发生SELECT事件，SELECT语句为： SELECT APPID, HOUSEID, APPINFO, REGISTERTIME, MOBILEPHONE, RECORDSTATUS, SPC10, SPC20, SPC50, SPC100 FROM authdb.TAB_DEV_INFO where APPID = ?
+gentoken go
+发送给客户端的数据为：{"opcode":"SNDTOKEN","token":"c102e19d-f513-42ac-a6d8-cea7c60d2d12","mode":"64"}
+客户端64-80-99-E6-15-27已经断开连接。
+客户端连接成功！
+_called true
+客户端连接成功！
+客户端连接成功！
+客户端连接成功！
+收到客户端申请cert_token请求，客户端设备号为： 64-80-99-E6-15-27
+发生SELECT事件，SELECT语句为： SELECT APPID, HOUSEID, APPINFO, REGISTERTIME, MOBILEPHONE, RECORDSTATUS, SPC10, SPC20, SPC50, SPC100 FROM authdb.TAB_DEV_INFO where APPID = ?
+gentoken go
+发送给客户端的数据为：{"opcode":"SNDTOKEN","token":"7f158f62-cd65-4175-8945-e8dfa50e5879","mode":"64"}
+客户端64-80-99-E6-15-27已经断开连接。
+客户端连接成功！
+_called true
+客户端连接成功！
+收到客户端申请cert_token请求，客户端设备号为： 64-80-99-E6-15-27
+发生SELECT事件，SELECT语句为： SELECT APPID, HOUSEID, APPINFO, REGISTERTIME, MOBILEPHONE, RECORDSTATUS, SPC10, SPC20, SPC50, SPC100 FROM authdb.TAB_DEV_INFO where APPID = ?
+gentoken go
+发送给客户端的数据为：{"opcode":"SNDTOKEN","token":"2b639eef-2929-46a9-b6dd-f01d074c43df","mode":"64"}
+客户端64-80-99-E6-15-27已经断开连接。
+_called true
+客户端连接成功！
+客户端连接成功！
+收到客户端申请cert_token请求，客户端设备号为： 64-80-99-E6-15-27
+发生SELECT事件，SELECT语句为： SELECT APPID, HOUSEID, APPINFO, REGISTERTIME, MOBILEPHONE, RECORDSTATUS, SPC10, SPC20, SPC50, SPC100 FROM authdb.TAB_DEV_INFO where APPID = ?
+gentoken go
+发送给客户端的数据为：{"opcode":"SNDTOKEN","token":"8a59ea3a-2f35-44ba-bebd-c677eafbcfbd","mode":"64"}
+客户端64-80-99-E6-15-27已经断开连接。
+_called true
+客户端连接成功！
+(node:23963) Warning: Possible EventEmitter memory leak detected. 11 SIGINT listeners added. Use emitter.setMaxListeners() to increase limit
+收到客户端申请cert_token请求，客户端设备号为： 64-80-99-E6-15-27
+发生SELECT事件，SELECT语句为： SELECT APPID, HOUSEID, APPINFO, REGISTERTIME, MOBILEPHONE, RECORDSTATUS, SPC10, SPC20, SPC50, SPC100 FROM authdb.TAB_DEV_INFO where APPID = ?
+gentoken go
+发送给客户端的数据为：{"opcode":"SNDTOKEN","token":"cbd45254-651d-44c7-a6df-2340245d2b4b","mode":"64"}
+客户端64-80-99-E6-15-27已经断开连接。
+_called true
+客户端连接成功！
+客户端连接成功！
+客户端连接成功！
+收到客户端申请cert_token请求，客户端设备号为： 64-80-99-E6-15-27
+发生SELECT事件，SELECT语句为： SELECT APPID, HOUSEID, APPINFO, REGISTERTIME, MOBILEPHONE, RECORDSTATUS, SPC10, SPC20, SPC50, SPC100 FROM authdb.TAB_DEV_INFO where APPID = ?
+gentoken go
+发送给客户端的数据为：{"opcode":"SNDTOKEN","token":"d0b7f942-7fe7-44e5-a4e0-4aee95d3186a","mode":"64"}
+客户端64-80-99-E6-15-27已经断开连接。
+_called true
+客户端连接成功！
+客户端连接成功！
+收到客户端申请cert_token请求，客户端设备号为： 64-80-99-E6-15-27
+发生SELECT事件，SELECT语句为： SELECT APPID, HOUSEID, APPINFO, REGISTERTIME, MOBILEPHONE, RECORDSTATUS, SPC10, SPC20, SPC50, SPC100 FROM authdb.TAB_DEV_INFO where APPID = ?
+gentoken go
+发送给客户端的数据为：{"opcode":"SNDTOKEN","token":"c692757e-fe5a-40c0-9a19-f7211ecb1e18","mode":"64"}
+客户端64-80-99-E6-15-27已经断开连接。
+_called true
+客户端连接成功！
+客户端连接成功！
+收到客户端申请cert_token请求，客户端设备号为： 64-80-99-E6-15-27
+发生SELECT事件，SELECT语句为： SELECT APPID, HOUSEID, APPINFO, REGISTERTIME, MOBILEPHONE, RECORDSTATUS, SPC10, SPC20, SPC50, SPC100 FROM authdb.TAB_DEV_INFO where APPID = ?
+gentoken go
+发送给客户端的数据为：{"opcode":"SNDTOKEN","token":"930812ae-7896-4b5d-8301-e1851c977b62","mode":"64"}
+客户端64-80-99-E6-15-27已经断开连接。
+_called true
+3f5a1717-490f-4ac3-ae6b-820c5cd12bfb
+客户端连接成功！
+收到客户端申请cert_token请求，客户端设备号为： 64-80-99-E6-15-27
+发生SELECT事件，SELECT语句为： SELECT APPID, HOUSEID, APPINFO, REGISTERTIME, MOBILEPHONE, RECORDSTATUS, SPC10, SPC20, SPC50, SPC100 FROM authdb.TAB_DEV_INFO where APPID = ?
+gentoken go
+获取64-80-99-E6-15-27的cert_tocken出错了！错误原因为无效的access_token
+客户端64-80-99-E6-15-27已经断开连接。
+客户端连接成功！
+客户端连接成功！
+客户端连接成功！
+客户端连接成功！
+客户端连接成功！
+客户端连接成功！
+收到客户端申请cert_token请求，客户端设备号为： 64-80-99-E6-15-27
+发生SELECT事件，SELECT语句为： SELECT APPID, HOUSEID, APPINFO, REGISTERTIME, MOBILEPHONE, RECORDSTATUS, SPC10, SPC20, SPC50, SPC100 FROM authdb.TAB_DEV_INFO where APPID = ?
+gentoken go
+获取64-80-99-E6-15-27的cert_tocken出错了！错误原因为无效的access_token
+客户端64-80-99-E6-15-27已经断开连接。
+客户端连接成功！
+收到客户端申请cert_token请求，客户端设备号为： 64-80-99-E6-15-27
+发生SELECT事件，SELECT语句为： SELECT APPID, HOUSEID, APPINFO, REGISTERTIME, MOBILEPHONE, RECORDSTATUS, SPC10, SPC20, SPC50, SPC100 FROM authdb.TAB_DEV_INFO where APPID = ?
+gentoken go
+获取64-80-99-E6-15-27的cert_tocken出错了！错误原因为无效的access_token
+客户端64-80-99-E6-15-27已经断开连接。
+客户端连接成功！
+收到客户端申请cert_token请求，客户端设备号为： 64-80-99-E6-15-27
+发生SELECT事件，SELECT语句为： SELECT APPID, HOUSEID, APPINFO, REGISTERTIME, MOBILEPHONE, RECORDSTATUS, SPC10, SPC20, SPC50, SPC100 FROM authdb.TAB_DEV_INFO where APPID = ?
+gentoken go
+获取64-80-99-E6-15-27的cert_tocken出错了！错误原因为无效的access_token
+客户端64-80-99-E6-15-27已经断开连接。
+客户端连接成功！
+收到客户端申请cert_token请求，客户端设备号为： 64-80-99-E6-15-27
+发生SELECT事件，SELECT语句为： SELECT APPID, HOUSEID, APPINFO, REGISTERTIME, MOBILEPHONE, RECORDSTATUS, SPC10, SPC20, SPC50, SPC100 FROM authdb.TAB_DEV_INFO where APPID = ?
+gentoken go
+获取64-80-99-E6-15-27的cert_tocken出错了！错误原因为无效的access_token
+客户端64-80-99-E6-15-27已经断开连接。
+客户端连接成功！
+收到客户端申请cert_token请求，客户端设备号为： 64-80-99-E6-15-27
+发生SELECT事件，SELECT语句为： SELECT APPID, HOUSEID, APPINFO, REGISTERTIME, MOBILEPHONE, RECORDSTATUS, SPC10, SPC20, SPC50, SPC100 FROM authdb.TAB_DEV_INFO where APPID = ?
+gentoken go
+获取64-80-99-E6-15-27的cert_tocken出错了！错误原因为无效的access_token
+客户端64-80-99-E6-15-27已经断开连接。
+3f5a1717-490f-4ac3-ae6b-820c5cd12bfb
+错误为： { Error: Not Found
+    at /root/authServer/app.js:36:13
+    at Layer.handle [as handle_request] (/root/authServer/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/root/authServer/node_modules/express/lib/router/index.js:312:13)
+    at /root/authServer/node_modules/express/lib/router/index.js:280:7
+    at Function.process_params (/root/authServer/node_modules/express/lib/router/index.js:330:12)
+    at next (/root/authServer/node_modules/express/lib/router/index.js:271:10)
+    at /root/authServer/node_modules/express/lib/router/index.js:618:15
+    at next (/root/authServer/node_modules/express/lib/router/index.js:256:14)
+    at Function.handle (/root/authServer/node_modules/express/lib/router/index.js:176:3)
+    at router (/root/authServer/node_modules/express/lib/router/index.js:46:12) status: 404 }
+[0mGET /recordings/ [33m404 [0m399.659 ms - 975[0m
+客户端连接成功！
+收到客户端申请cert_token请求，客户端设备号为： 64-80-99-E6-15-27
+发生SELECT事件，SELECT语句为： SELECT APPID, HOUSEID, APPINFO, REGISTERTIME, MOBILEPHONE, RECORDSTATUS, SPC10, SPC20, SPC50, SPC100 FROM authdb.TAB_DEV_INFO where APPID = ?
+gentoken go
+获取64-80-99-E6-15-27的cert_tocken出错了！错误原因为无效的access_token
+客户端64-80-99-E6-15-27已经断开连接。
+客户端连接成功！
+收到客户端申请cert_token请求，客户端设备号为： 64-80-99-E6-15-27
+发生SELECT事件，SELECT语句为： SELECT APPID, HOUSEID, APPINFO, REGISTERTIME, MOBILEPHONE, RECORDSTATUS, SPC10, SPC20, SPC50, SPC100 FROM authdb.TAB_DEV_INFO where APPID = ?
+gentoken go
+获取64-80-99-E6-15-27的cert_tocken出错了！错误原因为无效的access_token
+获取64-80-99-E6-15-27的cert_tocken出错了！错误原因为无效的access_token
+获取64-80-99-E6-15-27的cert_tocken出错了！错误原因为无效的access_token
+获取64-80-99-E6-15-27的cert_tocken出错了！错误原因为无效的access_token
+获取64-80-99-E6-15-27的cert_tocken出错了！错误原因为无效的access_token
+客户端64-80-99-E6-15-27已经断开连接。
+客户端连接成功！
+收到客户端申请cert_token请求，客户端设备号为： 64-80-99-E6-15-27
+发生SELECT事件，SELECT语句为： SELECT APPID, HOUSEID, APPINFO, REGISTERTIME, MOBILEPHONE, RECORDSTATUS, SPC10, SPC20, SPC50, SPC100 FROM authdb.TAB_DEV_INFO where APPID = ?
+gentoken go
+获取64-80-99-E6-15-27的cert_tocken出错了！错误原因为无效的access_token
+客户端64-80-99-E6-15-27已经断开连接。
+客户端连接成功！
+收到客户端申请cert_token请求，客户端设备号为： 64-80-99-E6-15-27
+发生SELECT事件，SELECT语句为： SELECT APPID, HOUSEID, APPINFO, REGISTERTIME, MOBILEPHONE, RECORDSTATUS, SPC10, SPC20, SPC50, SPC100 FROM authdb.TAB_DEV_INFO where APPID = ?
+gentoken go
+获取64-80-99-E6-15-27的cert_tocken出错了！错误原因为无效的access_token
+客户端64-80-99-E6-15-27已经断开连接。
+3f5a1717-490f-4ac3-ae6b-820c5cd12bfb
+3f5a1717-490f-4ac3-ae6b-820c5cd12bfb
