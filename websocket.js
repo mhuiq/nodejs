@@ -7,16 +7,16 @@ var devInfoDao = require('./lib/dao/dev_info_dao');
 var certTokenManager = require('./lib/cert_token_manager');
 var opcodeConstants = require('./lib/opcode_constants');
 var WebSocketServer = WebSocket.Server;
-var validClients = [];
+var validClients = {};
 
 //function start (server) {
-	function start () {
-	    //var wss = new WebSocketServer({server: server})
-			var wss = new WebSocketServer({port: 9777})
+function start() {
+    //var wss = new WebSocketServer({server: server})
+    var wss = new WebSocketServer({port: 9777})
     wss.on('connection', function (ws) {
         var appId = "";
         console.log('客户端连接成功！');
-        ws.send(JSON.stringify({"opcode": "connection","rtncode": "sucess", "errmsg":"建立连接成功"}));
+        ws.send(JSON.stringify({"opcode": "connection", "rtncode": "sucess", "errmsg": "建立连接成功"}));
         ws.on('message', function (message) {
             // TODO 处理客户端发过来的交易
             var reqParams = JSON.parse(message);
@@ -28,9 +28,9 @@ var validClients = [];
                     devInfoDao.queryByAppId(appId, function (result) {
                         // 判断该appId是否有效
                         if (result.length != 0) {
-                        	  console.log('gentoken go');
+                            console.log('gentoken go');
                             certTokenManager.addNewClient(appId, ws);
-                            validClients.push({"appId": appId, "ws": ws});
+                            validClients[appId] = ws;
                         }
                     });
                     break;
@@ -43,7 +43,7 @@ var validClients = [];
         ws.on('close', function () {
             // 客户端断开连接时清理客户端数据
             if (appId === "") {
-                return ;
+                return;
             }
             certTokenManager.removeClient(appId);
             removeValidClient();
@@ -51,11 +51,8 @@ var validClients = [];
         });
 
         removeValidClient = function () {
-            for (var i=0; i<validClients.length; ++i) {
-                if (validClients[i].appId === appId) {
-                    validClients.splice(i, 1);
-                    return;
-                }
+            if (validClients[appId] != undefined) {
+                delete validClients[appId];
             }
         };
 
@@ -68,6 +65,6 @@ var validClients = [];
 }
 
 exports.startWebsocket = start;
-exports.getClients = function() {
+exports.getClients = function () {
     return validClients;
 };

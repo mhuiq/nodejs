@@ -8,6 +8,9 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var house = require('./routes/house');
+var device = require('./routes/device');
+var authInfo = require('./routes/auth');
 var auth_result = require('./routes/auth_result');
 
 var app = express();
@@ -28,6 +31,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/userInfo', users);
+app.use('/houseInfo', house);
+app.use('/devInfo', device);
+app.use('/authInfo', authInfo);
 app.use('/cert_result', auth_result);
 
 
@@ -41,7 +47,7 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
-	console.log('错误为：', err);
+  console.log('错误为：', err);
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
