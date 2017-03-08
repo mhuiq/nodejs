@@ -1,0 +1,76 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>WebSocket Echo Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="../bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="../js/jquery-1.12.3.min.js"></script>
+    <script src="../js/jquery-1.12.3.min.js"></script>
+    <script src="../bootstrap-3.3.5/js/bootstrap.min.js"></script>
+    <script>
+        //建立连接
+        var ws = new WebSocket("ws://localhost:9777");
+        var nickname = "";
+        ws.onopen = function (e) {
+            console.log('Connection to server opened');
+        }
+        //显示
+        function appendLog(message) {
+            if (typeof message == "undefined") return;
+            var messages = document.getElementById('messages');
+            var messageElem = document.createElement("li");
+            var preface_label = "<span class=\"label label-info\">*</span>";
+            var message_text = "<h2>" + preface_label + "&nbsp;&nbsp;"
+            + message + "</h2>";
+            messageElem.innerHTML = message_text;
+            messages.appendChild(messageElem);
+        }
+        //收到消息处理
+        ws.onmessage = function (e) {
+            var data = JSON.parse(e.data);
+            appendLog(e.data);
+            console.log("ID: [%s] = %s", data.id, data.message);
+        }
+        ws.onclose = function (e) {
+            appendLog("Connection closed");
+            console.log("Connection closed");
+        }
+        //发送消息
+        function sendMessage() {
+            // {"opcode":"GENTOKEN","devid":"AC-BC-32-78-56-29"}
+            console.log($('#message').val());
+            ws.send($('#message').val());
+        }
+        //修改名称
+        function changName() {
+            var name = $("#name").val();
+            if (ws.readyState === WebSocket.OPEN) {
+                ws.send("/nick " + name);
+            }
+        }
+
+        function disconnect() {
+            ws.close();
+        }
+    </script>
+</head>
+
+<body >
+    <div class="vertical-center">
+        <div class="container">
+            <ul id="messages" class="list-unstyled"></ul>
+            <hr/>
+            <div class="form-group">
+                <input class="form-control" type="text" id="message" name="message"
+                       placeholder="Type text to echo in here" value="" autofocus/>
+            </div>
+            <button type="button" id="send" class="btn btn-primary"
+                    onclick="sendMessage();">
+                Send Message
+            </button>
+
+            <div class="form-group"><span>nikename：</span><input id="name" type="text" /> <button class="btn btn-sm btn-info" onclick="changName();">change</button></div>
+        </div>
+    </div>
+</body>
+</html>

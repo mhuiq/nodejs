@@ -18,7 +18,7 @@ router.get('/save', function (req, res, next) {
     devInfo.APPINFO = req.query.appinfo;
     devInfo.REGISTERTIME = Date.now();
     devInfo.MOBILEPHONE = req.query.mobilephone;
-    devInfo.RECORDSTATUS = 'A';
+    devInfo.RECORDSTATUS = 'Y';
     if (devInfo.APPID === undefined || devInfo.APPID.trim().length == 0 ||
         devInfo.HOUSEID === undefined || devInfo.HOUSEID.trim().length == 0 ||
         devInfo.APPINFO === undefined || devInfo.APPINFO.trim().length == 0 ||

@@ -1,6 +1,10 @@
 设备端与服务端采用WEBSOCKET连接，通讯报文采用json格式
 1、GENTOKEN
 MSG_GENTOKEN = "{\"opcode\":\"GENTOKEN\",\"devid\":%s}"
+# {"opcode":"GENTOKEN","devid":"4a:00:02:67:0f:d0"}
+# {"cert_token":"4eb935a3-f18d-4226-818f-29f70d46bb79","full_name":"张佳","id_num":"558998198709078899","cert_res":0,"cert_mode":66}
+
+
 设备端：定时发起（token失效5分钟）
 服务端：检查accesstoken是否失效，异步去认证端申请新token。
 

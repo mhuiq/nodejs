@@ -15,8 +15,8 @@ function start() {
     var wss = new WebSocketServer({port: 9777})
     wss.on('connection', function (ws) {
         var appId = "";
-        console.log('客户端连接成功！');
-        ws.send(JSON.stringify({"opcode": "connection", "rtncode": "sucess", "errmsg": "建立连接成功"}));
+
+
         ws.on('message', function (message) {
             // TODO 处理客户端发过来的交易
             var reqParams = JSON.parse(message);
@@ -28,9 +28,14 @@ function start() {
                     devInfoDao.queryByAppId(appId, function (result) {
                         // 判断该appId是否有效
                         if (result.length != 0) {
-                            console.log('gentoken go');
+                            console.log('客户端连接成功！');
+                            ws.send(JSON.stringify({"opcode": "connection", "rtncode": "sucess", "errmsg": "建立连接成功"}));
                             certTokenManager.addNewClient(appId, ws);
                             validClients[appId] = ws;
+                        } else {
+                            console.log('有非法客户端接入！mac地址为：', appId);
+                            ws.send(JSON.stringify({"opcode": "connection", "rtncode": "error", "errmsg": "非法客户端"}));
+                            ws.close();
                         }
                     });
                     break;

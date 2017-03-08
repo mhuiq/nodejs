@@ -68,12 +68,12 @@ router.post('/', function (req, res, next) {
         unLockResp.opcode = 'CERTRES';
         unLockResp.id_num = idNum;
         unLockResp.full_name = fullName;
-        var authSuccessFlag = false;
+        /*var authSuccessFlag = false;
         var buf = Buffer.alloc(4);
-        buf.write(certRes);
+        buf.write(certRes);*/
         // TODO 1.根据认证服务器返回的认证模式进行认证；2.认证成功后，将cert_token对应的certToken对象设置为已验证状态，并且为该客户端重新申请密钥
         // 0X40模式,只需比对第一字节(第二字节为’X’),如为0X42模式则需比较两字节；0X0F和0X4F需比较3个字节。
-        switch (certMode) {
+        /*switch (certMode) {
             case 0X40:
                 // TODO 认证姓名+身份证号码进行身份认证
                 if (String.fromCharCode(buf[0]) === '0' && String.fromCharCode(buf[1]) === 'X') {
@@ -105,8 +105,9 @@ router.post('/', function (req, res, next) {
                 responseData.error_msg = '不支持的认证模式';
                 res.send(JSON.stringify(responseData));
                 return;
-        }
-        if (authSuccessFlag) {
+        }*/
+        if (certRes === 0) {
+            console.log('向客户端发送开锁指令，', JSON.stringify(unLockResp));
             clients[appId].send(JSON.stringify(unLockResp));
         }
         responseData.ret_code = '0';
