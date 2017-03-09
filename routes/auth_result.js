@@ -50,13 +50,12 @@ router.post('/', function (req, res, next) {
     var certMode = req.body.cert_mode;
     // 根据appId找到房屋Id，根据房屋id找到所有的授权用户信息
     var appId = certTokenSubject.getAppId();
-    var sql = "select * from authdb.TAB_AUTH_INFO where HOUSEID = (select t1.houseid from TAB_DEV_INFO t1 where t1.APPID = ? and t1.RECORDSTATUS = 'Y') and IDCARD = ?";
+    // var sql = "select * from authdb.TAB_AUTH_INFO where HOUSEID = (select t1.houseid from TAB_DEV_INFO t1 where t1.APPID = ? and t1.RECORDSTATUS = 'Y') and IDCARD = ?";
 
     var clients = ws.getClients();
     var unLockResp = {};
-    db.query(sql, [appId, idNum], function (authInfoRs) {
-
-        if (authInfoRs.length < 1) {
+    db.query('call authProc(?, ?, ?, @authflag)', [appId, idNum, Date.now()], function (rs) {
+        if (rs[0][0].authflag < 1) {
             // TODO 返回给认证服务器错误信息
             responseData.ret_code = '4101';
             responseData.error_msg = '身份认证结果不匹配';
@@ -117,3 +116,12 @@ router.post('/', function (req, res, next) {
 });
 
 module.exports = router;
+
+// (function () {
+//     // db.query('call authProc('6C-0B-84-0B-D7-4B','448289198308238811','1489042955924', @authflag);', [appId, idNum], function (authInfoRs) {
+//     var cur = Date.now();
+//     db.query('call authProc(?, ?, ?, @authflag)', ['6C-0B-84-0B-D7-4B', '448289198308238811', cur], function (rs) {
+//
+//         console.log(rs[0][0].authflag);
+//     });
+// })();

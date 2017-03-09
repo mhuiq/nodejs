@@ -15,6 +15,8 @@ router.get('/save', function (req, res, next) {
     console.log(req.query)
     visitorInfo.IDCARD = req.query.idcard;
     visitorInfo.USERNAME = req.query.username;
+    visitorInfo.IMAGEPATH = req.query.imagepath;
+    visitorInfo.MOBILEPHONE = req.query.mobilephone;
     visitorInfo.HOUSEID = req.query.houseid;
     visitorInfo.VALIDATETIME = req.query.validatetime;
     visitorInfo.DURATION = req.query._duration;

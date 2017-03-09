@@ -17,7 +17,7 @@
 	openssl x509 -in keytool_crt.pem -inform pem -noout -text
 
 查看der格式证书
-	openssl x509 -in keytool_crt.der -inform der -noout -tex
+	openssl x509 -in keytool_crt.der -inform der -noout -text
 
 x509标准的der证书转pem
 	openssl x509 -inform der -in certificate.cer -out certificate.pem

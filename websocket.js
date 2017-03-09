@@ -15,8 +15,6 @@ function start() {
     var wss = new WebSocketServer({port: 9777})
     wss.on('connection', function (ws) {
         var appId = "";
-
-
         ws.on('message', function (message) {
             // TODO 处理客户端发过来的交易
             var reqParams = JSON.parse(message);
@@ -39,7 +37,6 @@ function start() {
                         }
                     });
                     break;
-
                 default :
                     break;
             }

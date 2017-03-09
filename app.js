@@ -11,6 +11,7 @@ var users = require('./routes/users');
 var house = require('./routes/house');
 var device = require('./routes/device');
 var authInfo = require('./routes/auth');
+var visitors = require('./routes/visitors');
 var auth_result = require('./routes/auth_result');
 
 var app = express();
@@ -34,6 +35,7 @@ app.use('/userInfo', users);
 app.use('/houseInfo', house);
 app.use('/devInfo', device);
 app.use('/authInfo', authInfo);
+app.use('/visitorsInfo', visitors);
 app.use('/cert_result', auth_result);
 
 
