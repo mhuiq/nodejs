@@ -15,7 +15,7 @@ router.get('/checklogin', function(req, res, next) {
         return;
     }
     resultMap['isLogin'] = true;
-    resultMap['redirectUrl'] = app_constants.login_url;
+    resultMap['redirectUrl'] = app_constants.index_url;
     res.send(JSON.stringify(resultMap));
     sessionManager.refreshSessionTimer(sid);
 });
@@ -59,10 +59,7 @@ router.get('/getloginuser', function(req, res, next) {
 
 function checkLogin(req, res) {
     var sid = req.cookies.sid;
-    if (sid === undefined) {
-        res.setHeader("Set-Cookie", ["sid=" + UUID.v1() + ";path=/;" ]);
-        return false;
-    }
+    console.log(JSON.stringify(sessionManager.getSessionMap()));
     if (sessionManager.getSession(sid) === undefined) {
         return false;
     }

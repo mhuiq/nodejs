@@ -33,8 +33,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function (req, res, next) {
   // TODO 记录访问日志
-  // console.log(req.originalUrl);
-  console.log(req.cookies);
+  // console.log();
+  console.log(req.originalUrl + ' : ' + JSON.stringify(req.cookies));
   var sid = req.cookies['sid'];
   if (sid === undefined || sid === '') {
     sid = UUID.v1();
@@ -43,14 +43,14 @@ app.use(function (req, res, next) {
   }
   next();
 });
-app.use('/auth', index);
-app.use('/auth/userInfo', users);
-app.use('/auth/houseInfo', house);
-app.use('/auth/devInfo', device);
-app.use('/auth/authInfo', authInfo);
-app.use('/auth/visitorsInfo', visitors);
-app.use('/auth/cert_result', auth_result);
-app.use('/auth/login', login);
+app.use('/', index);
+app.use('/userInfo', users);
+app.use('/houseInfo', house);
+app.use('/devInfo', device);
+app.use('/authInfo', authInfo);
+app.use('/visitorsInfo', visitors);
+app.use('/cert_result', auth_result);
+app.use('/login', login);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

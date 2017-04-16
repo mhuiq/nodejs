@@ -9,6 +9,7 @@ var certTokenManager = require('../lib/cert_token_manager');
 var db = require('../lib/db_connection_factory');
 var stringUtil = require('../lib/util/string_util');
 var sessionManager = require('../lib/session_manager');
+var app_constants = require('../lib/app_constants');
 
 router.get('/', function (req, res, next) {
     res.send('respond with auth_result');
@@ -25,7 +26,7 @@ router.options('/', function (req, res, next) {
 
 router.post('/', function (req, res, next) {
     var responseData = {};
-    console.log("收到的数据:", req);
+    console.log("收到的数据:", req.body);
     var certToken = req.body.cert_token;
     if (typeof(certToken) == 'undefined') {
         responseData.ret_code = '4021';
@@ -58,13 +59,15 @@ router.post('/', function (req, res, next) {
     var sessionId = sessionManager.getSessionIdByCertToken(certToken);
     if (sessionId != undefined) {
         var resultMap = {};
-        resultMap.authResutl = false;
+        resultMap['opcode'] = 'AUTHRESULT';
+        resultMap['isLogin'] = false;
         if (certRes === 0) {
-            resultMap.authResutl = true;
+            resultMap['isLogin'] = true;
+            resultMap['redirectUrl'] = app_constants.index_url;
             var session = {};
             session["loginUserName"] = fullName;
             session["loginUserIdNum"] = idNum;
-            sessionManager.setCertToken(sessionId, session);
+            sessionManager.setSession(sessionId, session);
             sessionManager.removeCertToken(sessionId);
         }
         clients[appId].send(JSON.stringify(resultMap));
