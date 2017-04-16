@@ -18,10 +18,10 @@ function start() {
         ws.on('message', function (message) {
             // TODO 处理客户端发过来的交易
             var reqParams = JSON.parse(message);
+            appId = reqParams['devid'];
             var opcode = reqParams['opcode'];
             switch (opcode) {
                 case opcodeConstants.gentoken:
-                    appId = reqParams['devid'];
                     console.log("收到客户端申请cert_token请求，客户端设备号为：", appId);
                     devInfoDao.queryByAppId(appId, function (result) {
                         // 判断该appId是否有效
@@ -36,6 +36,11 @@ function start() {
                             ws.close();
                         }
                     });
+                    break;
+                case opcodeConstants.logintoken:
+                    console.log("收到申请登录cert_token请求，sessionID为：", appId);
+                    certTokenManager.addNewClient(appId, ws);
+                    validClients[appId] = ws;
                     break;
                 default :
                     break;

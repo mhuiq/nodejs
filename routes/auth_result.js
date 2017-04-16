@@ -8,6 +8,7 @@ var ws = require('../websocket');
 var certTokenManager = require('../lib/cert_token_manager');
 var db = require('../lib/db_connection_factory');
 var stringUtil = require('../lib/util/string_util');
+var sessionManager = require('../lib/session_manager');
 
 router.get('/', function (req, res, next) {
     res.send('respond with auth_result');
@@ -51,8 +52,28 @@ router.post('/', function (req, res, next) {
     // 根据appId找到房屋Id，根据房屋id找到所有的授权用户信息
     var appId = certTokenSubject.getAppId();
     // var sql = "select * from authdb.TAB_AUTH_INFO where HOUSEID = (select t1.houseid from TAB_DEV_INFO t1 where t1.APPID = ? and t1.RECORDSTATUS = 'Y') and IDCARD = ?";
-
     var clients = ws.getClients();
+
+    // 判断是否为后台登录认证
+    var sessionId = sessionManager.getSessionIdByCertToken(certToken);
+    if (sessionId != undefined) {
+        var resultMap = {};
+        resultMap.authResutl = false;
+        if (certRes === 0) {
+            resultMap.authResutl = true;
+            var session = {};
+            session["loginUserName"] = fullName;
+            session["loginUserIdNum"] = idNum;
+            sessionManager.setCertToken(sessionId, session);
+            sessionManager.removeCertToken(sessionId);
+        }
+        clients[appId].send(JSON.stringify(resultMap));
+        responseData.ret_code = '0';
+        responseData.error_msg = '认证成功';
+        res.send(JSON.stringify(responseData));
+        return;
+    }
+
     var unLockResp = {};
     db.query('call authProc(?, ?, ?, @authflag)', [appId, idNum, Date.now()], function (rs) {
         if (rs[0][0].authflag < 1) {

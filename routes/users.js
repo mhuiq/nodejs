@@ -1,12 +1,21 @@
 var userDao = require('../lib/dao/user_info_dao');
 var express = require('express');
+var login = require('./login');
 var router = express.Router();
 
+router.use(function (req, res, next) {
+    if (!login.checkLogin(req, res)) {
+        var resultMap = login.getUnLoginResult();
+        res.send(JSON.stringify(resultMap));
+        return;
+    }
+    next();
+});
 /* GET users listing. */
 router.get('/getAll', function(req, res, next) {
     userDao.queryAllUserInfo(function (userInfos) {
         console.log(JSON.stringify(userInfos));
-        res.send('jsonpCallback(' + JSON.stringify(userInfos) + ')');
+        res.send(JSON.stringify(userInfos));
     });
 
 });
@@ -24,7 +33,7 @@ router.get('/saveUser', function (req, res, next) {
         userInfo.MOBILEPHONE === undefined || userInfo.MOBILEPHONE.trim().length ==0) {
         resultData.rtnCode = 'ERROR';
         resultData.rtnMsg = '数据有误！';
-        res.send('jsonpCallback(' + JSON.stringify(resultData) + ')');
+        res.send(JSON.stringify(resultData));
         return;
     }
     userInfo.SPC10 = '';
@@ -37,7 +46,7 @@ router.get('/saveUser', function (req, res, next) {
             resultData.rtnCode = 'ERROR';
             resultData.rtnMsg = '系统出错！';
         }
-        res.send('jsonpCallback(' + JSON.stringify(resultData) + ')');
+        res.send(JSON.stringify(resultData));
         res.end();
     });
 
@@ -49,7 +58,7 @@ router.get('/deleteByIdCard', function (req, res, nesxt) {
     if (req.query.idCard == undefined || req.query.idCard.trim().length != 18) {
         resultData.rtnCode = 'ERROR';
         resultData.rtnMsg = '数据有误！';
-        res.send('jsonpCallback(' + JSON.stringify(resultData) + ')');
+        res.send(JSON.stringify(resultData));
         return;
     }
     userDao.deleteByIdCard(parseInt(req.query.idCard.trim()), function (err) {
@@ -58,7 +67,7 @@ router.get('/deleteByIdCard', function (req, res, nesxt) {
             resultData.rtnCode = 'ERROR';
             resultData.rtnMsg = '系统错误！';
         }
-        res.send('jsonpCallback(' + JSON.stringify(resultData) + ')');
+        res.send(JSON.stringify(resultData));
     })
 });
 

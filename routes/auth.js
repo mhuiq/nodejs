@@ -1,25 +1,35 @@
 var authDao = require('../lib/dao/auth_info_dao');
 var express = require('express');
+var login = require('./login');
 var router = express.Router();
+
+router.use(function (req, res, next) {
+    if (!login.checkLogin(req, res)) {
+        var resultMap = login.getUnLoginResult();
+        res.send(JSON.stringify(resultMap));
+        return;
+    }
+    next();
+});
 
 /* GET users listing. */
 router.get('/getAll', function(req, res, next) {
     authDao.queryAllForIndex(function (authInfos) {
-        res.send('jsonpCallback(' + JSON.stringify(authInfos) + ')');
+        res.send(JSON.stringify(authInfos));
     })
 });
 
 router.get('/save', function (req, res, next) {
     var resultData = {};
     var authInfo = {};
-    console.log(req.query)
+    console.log(req.query);
     authInfo.IDCARD = req.query.idcard;
     authInfo.HOUSEID = req.query.houseid;
     if (authInfo.IDCARD === undefined || authInfo.IDCARD.trim().length == 0 ||
         authInfo.HOUSEID === undefined || authInfo.HOUSEID.trim().length == 0) {
         resultData.rtnCode = 'ERROR';
         resultData.rtnMsg = '数据有误！';
-        res.send('jsonpCallback(' + JSON.stringify(resultData) + ')');
+        res.send(JSON.stringify(resultData));
         return;
     }
     authInfo.SPC10 = '';
@@ -32,7 +42,7 @@ router.get('/save', function (req, res, next) {
             resultData.rtnCode = 'ERROR';
             resultData.rtnMsg = '系统出错！';
         }
-        res.send('jsonpCallback(' + JSON.stringify(resultData) + ')');
+        res.send(JSON.stringify(resultData));
     });
 
 });
@@ -42,7 +52,7 @@ router.get('/deleteById', function (req, res, nesxt) {
     if (req.query.authid == undefined || req.query.authid.trim().length == 0) {
         resultData.rtnCode = 'ERROR';
         resultData.rtnMsg = '数据有误！';
-        res.send('jsonpCallback(' + JSON.stringify(resultData) + ')');
+        res.send(JSON.stringify(resultData));
         return;
     }
     authDao.deleteById(req.query.authid.trim(), function (err) {
@@ -51,7 +61,7 @@ router.get('/deleteById', function (req, res, nesxt) {
             resultData.rtnCode = 'ERROR';
             resultData.rtnMsg = '系统错误！';
         }
-        res.send('jsonpCallback(' + JSON.stringify(resultData) + ')');
+        res.send(JSON.stringify(resultData));
     });
 
 });

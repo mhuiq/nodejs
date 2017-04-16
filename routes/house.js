@@ -1,11 +1,21 @@
 var houseDao = require('../lib/dao/house_info_dao');
 var express = require('express');
+var login = require('./login');
+var app_constants = require('../lib/app_constants');
 var router = express.Router();
 
+router.use(function (req, res, next) {
+    if (!login.checkLogin(req, res)) {
+        var resultMap = login.getUnLoginResult();
+        res.send(JSON.stringify(resultMap));
+        return;
+    }
+    next();
+});
 /* GET users listing. */
 router.get('/getAll', function(req, res, next) {
     houseDao.queryAll(function (houseInfos) {
-        res.send('jsonpCallback(' + JSON.stringify(houseInfos) + ')');
+        res.send(JSON.stringify(houseInfos));
     })
 });
 
@@ -21,7 +31,7 @@ router.get('/save', function (req, res, next) {
         houseInfo.HOUSEADDR === undefined || houseInfo.HOUSEADDR.trim().length == 0 ) {
         resultData.rtnCode = 'ERROR';
         resultData.rtnMsg = '数据有误！';
-        res.send('jsonpCallback(' + JSON.stringify(resultData) + ')');
+        res.send(JSON.stringify(resultData));
         return;
     }
     houseInfo.SPC10 = '';
@@ -34,7 +44,7 @@ router.get('/save', function (req, res, next) {
             resultData.rtnCode = 'ERROR';
             resultData.rtnMsg = '系统出错！';
         }
-        res.send('jsonpCallback(' + JSON.stringify(resultData) + ')');
+        res.send(JSON.stringify(resultData));
     });
 
 });
@@ -45,7 +55,7 @@ router.get('/deleteById', function (req, res, nesxt) {
     if (req.query.houseid == undefined || req.query.houseid.trim().length == 0) {
         resultData.rtnCode = 'ERROR';
         resultData.rtnMsg = '数据有误！';
-        res.send('jsonpCallback(' + JSON.stringify(resultData) + ')');
+        res.send(JSON.stringify(resultData));
         return;
     }
     houseDao.deleteById(req.query.houseid.trim(), function (err) {
@@ -54,7 +64,7 @@ router.get('/deleteById', function (req, res, nesxt) {
             resultData.rtnCode = 'ERROR';
             resultData.rtnMsg = '系统错误！';
         }
-        res.send('jsonpCallback(' + JSON.stringify(resultData) + ')');
+        res.send(JSON.stringify(resultData));
     });
 
 });

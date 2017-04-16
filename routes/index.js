@@ -1,11 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var ws = require('../websocket');
+var UUID = require('node-uuid');
 /* GET home page. */
 router.get('/', function (req, res, next) {
+    var cookies = req.cookies;
+    console.log(cookies.sid);
+
     console.log("index called");
     var clients = ws.getClients();
-    console.log(clients);
     for (var i=0; i<clients.length; ++i) {
         var wsclient = clients[i].ws;
         wsclient.send(JSON.stringify({
